@@ -1,7 +1,17 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import LoginPage from './Components/LoginPage'
 
+class App extends Component {
+  render() {
+    return (
+    <div className="App">
+      <LoginPage/>
+    </div>
+    );
+  }
+}
+/*
 class App extends Component {
   render() {
     return (
@@ -11,11 +21,12 @@ class App extends Component {
           <h1 className="App-title">Calendar Front End</h1>
         </header>
         <p className="App-intro">
-            This is the front-end for a calendar web app. 
+            This is the front-end for a calendar web app.
         </p>
       </div>
     );
   }
 }
+*/
 
 export default App;
