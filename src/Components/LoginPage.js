@@ -4,6 +4,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import AppBar from 'material-ui/AppBar';
 import TextField from 'material-ui/TextField';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 var apiBaseUrl = "http://localhost:5000/api";
 
@@ -22,13 +23,19 @@ class LoginPage extends Component {
     var payload = {
       "email":this.state.email,
       "password":this.state.password
-    }
+    };
+
+    console.log(payload);
     axios.post(apiBaseUrl + '/users/signin', payload)
       .then(function(response) {
-        console.log(response);
+        console.log('res: ' + response);
         if(response.data.code === 200) {
           console.log('Login successful');
+          
         }
+      })
+      .catch(function(err) {
+        console.log(err);
       })
   }
 
@@ -58,6 +65,14 @@ class LoginPage extends Component {
             primary={true}
             onClick={(event) => this.handleClick(event)}
           />
+            <br/>
+            <br/>
+            <RaisedButton
+              label="Register"
+              primary={true}
+              containerElement={<Link to="/register"/>}
+            >
+            </RaisedButton>
           </div>
         </MuiThemeProvider>
       </div>
