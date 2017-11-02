@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import AppBar from 'material-ui/AppBar';
-import Menu from 'material-ui/Menu';
 import MenuItem from 'material-ui/MenuItem';
 import Drawer from 'material-ui/Drawer';
 
@@ -34,7 +33,7 @@ class Dashboard extends Component {
           <Drawer
             docked={false}
             open={this.state.drawerOpen}
-            width={'10%'}
+            width={200}
             onRequestChange={this.toggleDrawer}>
             <MenuItem>Tasks</MenuItem>
             <MenuItem>Friends</MenuItem>

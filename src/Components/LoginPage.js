@@ -6,8 +6,6 @@ import TextField from 'material-ui/TextField';
 import axios from 'axios';
 import { Link, Redirect } from 'react-router-dom';
 
-var apiBaseUrl = "http://localhost:5000/api";
-
 class LoginPage extends Component {
   constructor(props) {
     super(props);
@@ -28,7 +26,7 @@ class LoginPage extends Component {
 
     var self = this;
     console.log(payload);
-    axios.post(apiBaseUrl + '/users/signin', payload)
+    axios.post(this.props.baseUri + '/users/signin', payload)
       .then(function(response) {
         console.log(response);
         if(response.status === 200) {

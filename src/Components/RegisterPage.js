@@ -4,8 +4,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import AppBar from 'material-ui/AppBar';
 import axios from 'axios';
-
-var apiBaseUrl = "http://localhost:5000/api";
+import { Redirect } from 'react-router-dom';
 
 class RegisterPage extends Component {
   constructor(props) {
@@ -16,29 +15,36 @@ class RegisterPage extends Component {
       last_name: '',
       email: '',
       user_name: '',
-      password: ''
+      password: '',
+      successful: false
     }
   }
 
   handleClick(event) {
-    var payload ={
+    let payload ={
       "first_name": this.state.first_name,
       "last_name": this.state.last_name,
       "email": this.state.email,
       "user_name": this.state.user_name,
       "password": this.state.password
-    }
+    };
+
+    let self = this;
     console.log(payload);
-    axios.post(apiBaseUrl + '/users', payload)
+    axios.post(this.props.baseUri + '/users', payload)
       .then(function(response){
         console.log(response);
-        if(response.data.code === 2000) {
+        if(response.status === 200) {
           console.log('Registered User');
+          self.setState({successful: true});
         }
       })
   }
 
   render() {
+    if(this.state.successful) {
+      return <Redirect to="dashboard"/>
+    }
     return (
       <div>
         <MuiThemeProvider>

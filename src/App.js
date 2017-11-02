@@ -12,13 +12,14 @@ import Dashboard from "./Components/Dashboard";
 
 class App extends Component {
   render() {
+    var baseUri = "http://10.0.0.23:5000/api";
     return (
     <div className="App">
       <Router>
         <Switch>
           <Route exact path="/" component={HomePage} />
-          <Route path="/signin" component={LoginPage} />
-          <Route path="/register" component={RegisterPage} />
+          <Route path="/signin" render={(props) => (<LoginPage baseUri={baseUri} {...props}/>)} />
+          <Route path="/register" render={(props) => (<RegisterPage baseUri={baseUri} {...props}/>)} />
           <Route path="/dashboard" component={Dashboard} />
         </Switch>
       </Router>
