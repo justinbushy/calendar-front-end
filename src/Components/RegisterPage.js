@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import RaisedButton from 'material-ui/RaisedButton';
+import Button from 'material-ui/Button';
 import TextField from 'material-ui/TextField';
 import AppBar from 'material-ui/AppBar';
+import Toolbar from 'material-ui/Toolbar';
+import IconButton from 'material-ui/IconButton';
+import MenuIcon from 'material-ui-icons/Menu';
+import Typography from 'material-ui/Typography';
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
 
@@ -47,51 +50,65 @@ class RegisterPage extends Component {
     }
     return (
       <div>
-        <MuiThemeProvider>
-          <AppBar title="Register"/>
-        </MuiThemeProvider>
-        <MuiThemeProvider>
+        {/*<AppBar title="Register"/>*/}
+          <AppBar position="static">
+            <Toolbar>
+              <IconButton color="contrast" aria-label="Menu">
+                <MenuIcon />
+              </IconButton>
+              <Typography type="title" color="inherit">
+                Register
+              </Typography>
+            </Toolbar>
+          </AppBar>
           <div>
             <TextField
-              hintText="First Name"
-              floatingLabelText="First Name"
+              label="First Name"
+              placeholder="First Name"
+              margin="dense"
               onChange={(event, newValue) => this.setState({first_name:newValue})}
             />
             <br/>
             <TextField
-              hintText="Last Name"
-              floatingLabelText="Last Name"
+              label="Last Name"
+              placeholder="Last Name"
+              margin="dense"
               onChange={(event, newValue) => this.setState({last_name:newValue})}
             />
             <br/>
             <TextField
-              hintText="Email"
-              floatingLabelText="Email"
+              label="Email"
+              placeholder="Email"
+              margin="dense"
               onChange={(event, newValue) => this.setState({email:newValue})}
             />
             <br/>
             <TextField
-              hintText="User Name"
-              floatingLabelText="User Name"
+              label="User Name"
+              placeholder="User Name"
+              margin="dense"
               onChange={(event, newValue) => this.setState({user_name:newValue})}
             />
             <br/>
             <TextField
-              hintText="Password"
-              floatingLabelText="Password"
+              label="Password"
               type="password"
+              margin="dense"
               onChange={(event, newValue) => this.setState({password:newValue})}
             />
             <br/>
             <br/>
+            {/*
             <RaisedButton
               label="Register"
               primary={true}
               onClick={(event) => this.handleClick(event)}
             />
+            */}
+            <Button raised color="primary" onClick={(event) => this.handleClick(event)}>
+              Register
+            </Button>
           </div>
-        </MuiThemeProvider>
-
       </div>
     );
   }

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import RaisedButton from 'material-ui/RaisedButton';
+import Button from 'material-ui/Button';
 import { Link } from 'react-router-dom';
 
 class HomePage extends Component {
@@ -8,23 +7,23 @@ class HomePage extends Component {
     return(
      <div>
        <h2>Welcome to the Calendar App</h2>
-       <h3>Login</h3>
-       <MuiThemeProvider>
          <div>
-           <RaisedButton
-             label="Login"
-             primary={true}
-             containerElement={<Link to="/signin"/>}
-           />
+           <Button component={Link} raised color="primary" to="/signin">
+             Login
+           </Button>
            <br/>
            <br/>
+           {/*
            <RaisedButton
              label="Register"
              primary={true}
              containerElement={<Link to="/register"/>}
            />
+           */}
+           <Button component={Link} raised color="primary" to="/register">
+             Register
+           </Button>
          </div>
-       </MuiThemeProvider>
      </div>
     );
   }

@@ -10,9 +10,11 @@ import RegisterPage from "./Components/RegisterPage";
 import HomePage from "./Components/HomePage";
 import Dashboard from "./Components/Dashboard";
 
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+
 class App extends Component {
   render() {
-    var baseUri = "http://10.0.0.23:5000/api";
+    var baseUri = "https://immense-eyrie-34156.herokuapp.com/api";
     return (
     <div className="App">
       <Router>

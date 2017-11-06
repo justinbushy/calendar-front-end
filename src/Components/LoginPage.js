@@ -1,10 +1,20 @@
 import React, { Component } from 'react';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import RaisedButton from 'material-ui/RaisedButton';
+import Button from 'material-ui/Button';
+import { withStyles } from 'material-ui/styles';
 import AppBar from 'material-ui/AppBar';
+import Toolbar from 'material-ui/Toolbar';
 import TextField from 'material-ui/TextField';
+import IconButton from 'material-ui/IconButton';
+import Typography from 'material-ui/Typography';
+import MenuIcon from 'material-ui-icons/Menu';
+import Drawer from 'material-ui/Drawer';
+import List, { ListItem } from 'material-ui/List';
 import axios from 'axios';
 import { Link, Redirect } from 'react-router-dom';
+
+const styles = {
+  width: 150
+}
 
 class LoginPage extends Component {
   constructor(props) {
@@ -13,8 +23,15 @@ class LoginPage extends Component {
     this.state = {
       email: '',
       password: '',
-      successful: false
+      successful: false,
+      drawerOpen: false
     };
+
+    this.toggleDrawer = this.toggleDrawer.bind(this);
+  }
+
+  toggleDrawer() {
+    this.setState({drawerOpen: !this.state.drawerOpen});
   }
 
   handleClick(event) {
@@ -47,42 +64,54 @@ class LoginPage extends Component {
     }
     return (
       <div>
-        <MuiThemeProvider>
-          <AppBar title="Login"/>
-        </MuiThemeProvider>
-        <MuiThemeProvider>
-          <div>
+        <AppBar position="static">
+          <Toolbar>
+            <IconButton color="contrast" aria-label="Menu" onClick={this.toggleDrawer}>
+              <MenuIcon />
+            </IconButton>
+            <Typography type="title" color="inherit">
+              Login
+            </Typography>
+          </Toolbar>
+        </AppBar>
+        <Drawer
+          anchor="left"
+          open={this.state.drawerOpen}
+          onRequestClose={this.toggleDrawer}
+        >
+          <List style={styles}>
+           <ListItem button component={Link} to="/">
+             Home
+           </ListItem>
+          </List>
+        </Drawer>
+        <div>
           <TextField
-            hintText="Email"
-            floatingLabelText="Email"
-            onChange = {(event, newValue) => this.setState({email:newValue})}
+            label="Email"
+            placeholder="Email"
+            margin="normal"
+            onChange = {(event) => this.setState({email: event.target.value})}
           />
           <br/>
           <TextField
-            hintText="Password"
-            floatingLabelText="Password"
-            type="password"
-            onChange = {(event, newValue) => this.setState({password: newValue})}
+            label="Password"
+            type="Password"
+            margin="normal"
+            onChange = {(event) => this.setState({password: event.target.value})}
           />
           <br/>
-          <RaisedButton
-            label="Submit"
-            primary={true}
-            onClick={(event) => this.handleClick(event)}
-          />
-            <br/>
-            <br/>
-            <RaisedButton
-              label="Register"
-              primary={true}
-              containerElement={<Link to="/register"/>}
-            >
-            </RaisedButton>
-          </div>
-        </MuiThemeProvider>
+          <Button raised color="primary" onClick={(event) => this.handleClick(event)}>
+            Submit
+          </Button>
+          <br/>
+          <br/>
+          <Button raised component={Link} color="primary" to="/register">
+            Register
+          </Button>
+        </div>
       </div>
     );
   }
 }
 
-export default LoginPage;
+export default withStyles(styles)(LoginPage);
