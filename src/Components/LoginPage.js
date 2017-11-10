@@ -99,6 +99,7 @@ class LoginPage extends Component {
             label="Email"
             placeholder="Email"
             margin="normal"
+            type="email"
             onChange = {(event) => this.setState({email: event.target.value})}
           />
           <br/>

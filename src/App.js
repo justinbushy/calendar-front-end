@@ -13,7 +13,7 @@ import Dashboard from "./Components/Dashboard";
 class App extends Component {
   render() {
     {/*var baseUri = "https://immense-eyrie-34156.herokuapp.com/api";*/}
-    let baseUri = "http://localhost:5000/api";
+    let baseUri = "http://10.0.0.23:5000/api";
     return (
     <div className="App">
       <Router>

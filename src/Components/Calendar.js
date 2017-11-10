@@ -74,11 +74,11 @@ class Calendar extends Component {
     return(
       <div style={gridStyles}>
             {grids}
-        <DayDialog
+        {/*<DayDialog
         open={this.state.dialogOpen}
         day={this.state.selectedDay}
         onRequestClose={this.handleRequestClose}
-        />
+        />*/}
       </div>
     );
   }

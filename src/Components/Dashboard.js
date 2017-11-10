@@ -87,6 +87,7 @@ class Dashboard extends Component {
             </Grid>
           </Grid>
         </Grid>
+        <p>November 2017</p>
         <Calendar baseUri={this.state.baseUri} userId={this.state.userId} authTok={this.state.authTok}/>
       </div>
     );
