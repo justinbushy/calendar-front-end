@@ -10,11 +10,10 @@ import RegisterPage from "./Components/RegisterPage";
 import HomePage from "./Components/HomePage";
 import Dashboard from "./Components/Dashboard";
 
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-
 class App extends Component {
   render() {
-    var baseUri = "https://immense-eyrie-34156.herokuapp.com/api";
+    {/*var baseUri = "https://immense-eyrie-34156.herokuapp.com/api";*/}
+    let baseUri = "http://localhost:5000/api";
     return (
     <div className="App">
       <Router>
@@ -22,7 +21,7 @@ class App extends Component {
           <Route exact path="/" component={HomePage} />
           <Route path="/signin" render={(props) => (<LoginPage baseUri={baseUri} {...props}/>)} />
           <Route path="/register" render={(props) => (<RegisterPage baseUri={baseUri} {...props}/>)} />
-          <Route path="/dashboard" component={Dashboard} />
+          <Route path="/dashboard" render={(props) => (<Dashboard baseUri={baseUri} {...props}/>)} />
         </Switch>
       </Router>
     </div>

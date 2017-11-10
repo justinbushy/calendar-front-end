@@ -8,6 +8,7 @@ import Typography from 'material-ui/Typography';
 import MenuIcon from 'material-ui-icons/Menu';
 import Button from 'material-ui/Button';
 import List, { ListItem } from 'material-ui/List';
+import Grid from 'material-ui/Grid';
 
 import Calendar from './Calendar';
 
@@ -19,10 +20,15 @@ class Dashboard extends Component {
   constructor(props) {
     super(props);
 
+    console.log(props.location.state.userId);
     this.state = {
-      drawerOpen : false
-    }
+      drawerOpen : false,
+      baseUri: this.props.baseUri,
+      userId: props.location.state.userId,
+      authTok: props.location.state.authTok
+    };
 
+    console.log(this.state);
    this.toggleDrawer = this.toggleDrawer.bind(this);
   }
 
@@ -31,14 +37,9 @@ class Dashboard extends Component {
   }
 
   render() {
-    const { classes } = this.props;
 
     return (
       <div>
-        {/*<AppBar
-            title="Dashboard"
-            onLeftIconButtonTouchTap={this.toggleDrawer}
-          />*/}
         <AppBar position="static">
           <Toolbar>
             <IconButton color="contrast" aria-label="Menu" onClick={this.toggleDrawer}>
@@ -65,8 +66,28 @@ class Dashboard extends Component {
           </List>
           </div>
         </Drawer>
-          <h3>Welcome to the application!</h3>
-        <Calendar/>
+        <Grid container>
+          <Grid item xs={12}>
+            <Grid
+              container
+              alignItems="center"
+              justify="flex-end"
+            >
+              <Grid item>
+                <Button raised dense>
+                  Month
+                </Button>
+                <Button raised dense>
+                  Week
+                </Button>
+                <Button raised dense>
+                  Day
+                </Button>
+              </Grid>
+            </Grid>
+          </Grid>
+        </Grid>
+        <Calendar baseUri={this.state.baseUri} userId={this.state.userId} authTok={this.state.authTok}/>
       </div>
     );
   }

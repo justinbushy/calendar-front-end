@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Grid from 'material-ui/Grid';
 import Button from 'material-ui/Button';
 import DayDialog from './DayDialog';
+import Day from './Day';
 
 const buttonStyles = {
   padding: 0
@@ -16,10 +17,19 @@ class Calendar extends Component {
   constructor(props) {
     super(props);
 
+    console.log('Calendar props: ');
+    console.log(props);
+
     this.state = {
       dialogOpen: false,
-      selectedDay: 1
+      selectedDay: 1,
+      baseUri: props.baseUri,
+      userId: props.userId,
+      authTok: props.authTok
     }
+
+    console.log('calendar state:');
+    console.log(this.state);
   }
 
   handleDialogOpen = day => {
@@ -28,7 +38,7 @@ class Calendar extends Component {
 
   handleRequestClose = () => {
     this.setState({dialogOpen: false})
-  }
+  };
 
   createWeek(start) {
     let days = [];
@@ -37,9 +47,7 @@ class Calendar extends Component {
       if(comp > 0 && comp < 31) {
         days.push(
           <Grid key={i+(7*start)} item xs={1} sm>
-            <Button style={buttonStyles} disableRipple={true} onClick={() => this.handleDialogOpen(comp)}>
-              {comp}
-            </Button>
+            <Day day={comp} baseUri={this.state.baseUri} userId={this.state.userId} authTok={this.state.authTok}/>
           </Grid>)
       }
       else {
@@ -56,7 +64,7 @@ class Calendar extends Component {
     let grids = [];
     for(let i =0; i < 5; i++) {
       let days = this.createWeek(i);
-      grids.push(<Grid container justify="center" spacing={6}>{days}</Grid>);
+      grids.push(<Grid container justify="center" alignItems="center">{days}</Grid>);
     }
     return grids;
   }
@@ -65,7 +73,7 @@ class Calendar extends Component {
     const grids = this.createGrid();
     return(
       <div style={gridStyles}>
-        {grids}
+            {grids}
         <DayDialog
         open={this.state.dialogOpen}
         day={this.state.selectedDay}

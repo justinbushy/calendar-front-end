@@ -24,7 +24,9 @@ class LoginPage extends Component {
       email: '',
       password: '',
       successful: false,
-      drawerOpen: false
+      drawerOpen: false,
+      userId: '',
+      authTok: ''
     };
 
     this.toggleDrawer = this.toggleDrawer.bind(this);
@@ -47,7 +49,11 @@ class LoginPage extends Component {
       .then(function(response) {
         console.log(response);
         if(response.status === 200) {
-          console.log('Login successful');
+          var uID = response.data.user_id;
+          console.log("uID: " + uID);
+          self.setState({userId: uID, authTok: response.data.token});
+          console.log('userId');
+          console.log(self.state.userId)
           self.setState({successful: true});
         }
       })
@@ -59,7 +65,10 @@ class LoginPage extends Component {
   render() {
     if(this.state.successful) {
       return (
-        <Redirect to="/dashboard"/>
+        <Redirect to={{
+          pathname: "/dashboard",
+          state: { userId: this.state.userId, authTok: this.state.authTok }
+        }}/>
       )
     }
     return (

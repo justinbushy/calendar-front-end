@@ -19,7 +19,8 @@ class RegisterPage extends Component {
       email: '',
       user_name: '',
       password: '',
-      successful: false
+      successful: false,
+      userId: ''
     }
   }
 
@@ -39,14 +40,17 @@ class RegisterPage extends Component {
         console.log(response);
         if(response.status === 200) {
           console.log('Registered User');
-          self.setState({successful: true});
+          self.setState({successful: true, userId: response.data.user_id});
         }
       })
   }
 
   render() {
     if(this.state.successful) {
-      return <Redirect to="dashboard"/>
+      return <Redirect to={{
+        pathname: "/dashboard",
+        state: { userId: this.state.userId }
+      }}/>
     }
     return (
       <div>
@@ -66,35 +70,35 @@ class RegisterPage extends Component {
               label="First Name"
               placeholder="First Name"
               margin="dense"
-              onChange={(event, newValue) => this.setState({first_name:newValue})}
+              onChange={(event) => this.setState({first_name: event.target.value})}
             />
             <br/>
             <TextField
               label="Last Name"
               placeholder="Last Name"
               margin="dense"
-              onChange={(event, newValue) => this.setState({last_name:newValue})}
+              onChange={(event) => this.setState({last_name: event.target.value})}
             />
             <br/>
             <TextField
               label="Email"
               placeholder="Email"
               margin="dense"
-              onChange={(event, newValue) => this.setState({email:newValue})}
+              onChange={(event) => this.setState({email: event.target.value})}
             />
             <br/>
             <TextField
               label="User Name"
               placeholder="User Name"
               margin="dense"
-              onChange={(event, newValue) => this.setState({user_name:newValue})}
+              onChange={(event) => this.setState({user_name: event.target.value})}
             />
             <br/>
             <TextField
               label="Password"
               type="password"
               margin="dense"
-              onChange={(event, newValue) => this.setState({password:newValue})}
+              onChange={(event) => this.setState({password: event.target.value})}
             />
             <br/>
             <br/>
