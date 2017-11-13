@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import Grid from 'material-ui/Grid';
 import Button from 'material-ui/Button';
-import DayDialog from './DayDialog';
 import Day from './Day';
 
 const buttonStyles = {
-  padding: 0
+  padding: 0,
 };
 
 const gridStyles = {
@@ -64,7 +63,7 @@ class Calendar extends Component {
     let grids = [];
     for(let i =0; i < 5; i++) {
       let days = this.createWeek(i);
-      grids.push(<Grid container justify="center" alignItems="center">{days}</Grid>);
+      grids.push(<Grid container justify="space-around" alignItems="center">{days}</Grid>);
     }
     return grids;
   }
@@ -73,12 +72,30 @@ class Calendar extends Component {
     const grids = this.createGrid();
     return(
       <div style={gridStyles}>
-            {grids}
-        {/*<DayDialog
-        open={this.state.dialogOpen}
-        day={this.state.selectedDay}
-        onRequestClose={this.handleRequestClose}
-        />*/}
+        <Grid container justify="space-around" alignItems="center">
+          <Grid item xs={1} sm>
+            Su
+          </Grid>
+          <Grid item xs={1} sm>
+            M
+          </Grid>
+          <Grid item xs={1} sm>
+            Tu
+          </Grid>
+          <Grid item xs={1} sm>
+            W
+          </Grid>
+          <Grid item xs={1} sm>
+            Th
+          </Grid>
+          <Grid item xs={1} sm>
+            F
+          </Grid>
+          <Grid item xs={1} sm>
+            Sa
+          </Grid>
+        </Grid>
+        {grids}
       </div>
     );
   }

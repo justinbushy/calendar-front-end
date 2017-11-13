@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import Dialog, {
-  DialogItem,
   DialogActions,
   DialogContent,
-  DialogContentText,
   DialogTitle
 } from 'material-ui/Dialog';
 import TextField from 'material-ui/TextField';
@@ -24,7 +22,6 @@ class EventFormDialog extends Component {
       day: props.day,
       baseUri: props.baseUri,
       openSuccessDialog: false,
-      day: props.day
     }
 
     console.log('eventdialog state')

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import AppBar from 'material-ui/AppBar';
-import { MenuItem } from 'material-ui/Menu';
 import Drawer from 'material-ui/Drawer';
 import Toolbar from 'material-ui/Toolbar';
 import IconButton from 'material-ui/IconButton';
