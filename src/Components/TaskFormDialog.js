@@ -30,6 +30,11 @@ class TaskFormDialog extends Component {
     this.props.onRequestClose();
   };
 
+  handleCloseSuccessDialog = () => {
+    this.setState({openSuccessDialog: false});
+    this.props.onRequestClose();
+  };
+
   handleAddTask = () => {
     let date;
     if(this.state.day < 10) {
@@ -87,6 +92,16 @@ class TaskFormDialog extends Component {
             </Button>
             <Button color="accent" onClick={this.handleRequestClose}>
               Cancel
+            </Button>
+          </DialogActions>
+        </Dialog>
+        <Dialog open={this.state.openSuccessDialog}>
+          <DialogTitle>
+            Task Created
+          </DialogTitle>
+          <DialogActions>
+            <Button onClick={this.handleCloseSuccessDialog} color="primary" autoFocus>
+              Okay
             </Button>
           </DialogActions>
         </Dialog>

@@ -45,6 +45,7 @@ class LoginPage extends Component {
 
     var self = this;
     console.log(payload);
+    console.log(this.props.baseUri + '/users/signing');
     axios.post(this.props.baseUri + '/users/signin', payload)
       .then(function(response) {
         console.log(response);

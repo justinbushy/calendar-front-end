@@ -35,6 +35,8 @@ class Day extends Component {
 
   dayChanged = () => {
     let self = this;
+
+    //Get Events for this day
     axios.get(this.state.baseUri + '/users/' + this.state.userId + '/events/date/' + this.state.dateStr,
       { headers: { Authorization: this.state.authStr }})
       .then(function(response) {
@@ -49,8 +51,23 @@ class Day extends Component {
       })
       .catch(function(err) {
         console.log(err);
-      })
+      });
 
+    //Get Tasks for this day
+    let taskReqStr = this.state.baseUri + '/users/' + this.state.userId + '/tasks/date/' + this.state.dateStr;
+    axios.get(taskReqStr,
+      { headers: { Authorization: this.state.authStr }})
+      .then(function(response) {
+        if(response.status === 200) {
+          if(response.data.data.length > 0){
+            //console.log(response.data.data);
+          }
+          self.setState({tasks: response.data.data});
+        }
+      })
+      .catch(function(err) {
+        console.log(err);
+      });
   };
 
   taskChanged = () => {

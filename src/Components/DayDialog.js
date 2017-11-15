@@ -12,7 +12,7 @@ class DayDialog extends Component {
     super(props);
 
     this.state = {
-      checked: [0],
+      checked: [],
       events: props.events,
       tasks: props.tasks,
       addDialogOpen: false,
@@ -21,16 +21,24 @@ class DayDialog extends Component {
       authTok: props.authTok,
       baseUri: props.baseUri,
       day: props.day,
-      dayChanged: props.dayChanged
-    }
+      dayChanged: props.dayChanged,
+      eventsList: [],
+      tasksList: []
+    };
 
-    console.log('Daydailog state');
-    console.log(this.state);
   }
 
   componentWillReceiveProps(nextProps) {
-    if(nextProps.events !== this.props.events) {
-      this.setState({events: nextProps.events})
+    if(nextProps !== this.props) {
+      const eList = this.createEventList();
+      const tList = this.createTaskList();
+      console.log('elist');
+      console.log(eList);
+      this.setState({events: nextProps.events,
+        tasks: nextProps.tasks,
+        eventsList: eList,
+        tasksList: tList
+      })
     }
   }
 
@@ -39,14 +47,16 @@ class DayDialog extends Component {
     const currentIndex = checked.indexOf(value);
     const newChecked = [...checked];
 
+    console.log('checked toggle');
+    console.log(value);
     if(currentIndex === -1) {
       newChecked.push(value);
     }
     else {
       newChecked.splice(currentIndex, 1);
     }
-    this.setState({checked: newChecked})
-  }
+    this.setState({checked: newChecked});
+  };
 
   handleRequestClose = () => {
     this.props.onRequestClose();
@@ -67,6 +77,7 @@ class DayDialog extends Component {
 
   handleTaskRequestClose = () => {
     this.setState({taskDialogOpen: false});
+    this.props.dayChanged();
   };
 
   createEventList() {
@@ -85,15 +96,18 @@ class DayDialog extends Component {
     for(let i = 0; i < len; i++) {
       let title = this.state.tasks[i].title;
       tasksList.push(<ListItem key={i} button disableRipple onClick={this.handleCheckedToggle(i)}>
-        <Checkbox checked={this.state.checked.indexOf(i) !== -1} tabIndex={-1} disableRiple={true}/>
+        <Checkbox checked={this.state.checked.indexOf(i) !== -1} tabIndex={-1} disableRipple={true}/>
         <ListItemText primary={title}/>
       </ListItem>);
     }
+    return tasksList;
   }
 
   render() {
     const { open, day } = this.props;
 
+    console.log('render');
+    console.log(this.state.checked);
     const eList = this.createEventList();
     const tList = this.createTaskList();
     return (
@@ -101,7 +115,8 @@ class DayDialog extends Component {
         <Dialog onRequestClose={this.handleRequestClose} open={open}>
           <DialogTitle>Nov. {day}</DialogTitle>
           <List>
-            {eList}
+            {/*this.state.events.length*/}
+            {this.state.eventsList}
             <ListItem button onClick={this.handleAddEvent}>
               <ListItemIcon>
                 <ControlPoint/>
@@ -110,7 +125,7 @@ class DayDialog extends Component {
             </ListItem>
             <Divider/>
             {tList}
-            <ListItem key={0} button disableRipple onClick={this.handleCheckedToggle(0)}>
+            {/*<ListItem key={0} button disableRipple onClick={this.handleCheckedToggle(0)}>
               <Checkbox
                 checked={this.state.checked.indexOf(0) !== -1}
                 tabIndex={-1}
@@ -125,7 +140,7 @@ class DayDialog extends Component {
                 disableRipple={true}
               />
               <ListItemText primary="Eat Breakfast"/>
-            </ListItem>
+            </ListItem>*/}
             <ListItem button>
               <ListItemIcon>
                 <ControlPoint/>
