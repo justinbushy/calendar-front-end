@@ -9,6 +9,7 @@ import {
 import RegisterPage from "./Components/RegisterPage";
 import HomePage from "./Components/HomePage";
 import Dashboard from "./Components/Dashboard";
+import Friends from './Components/Friends';
 
 class App extends Component {
   render() {
@@ -22,6 +23,7 @@ class App extends Component {
           <Route path="/signin" render={(props) => (<LoginPage baseUri={baseUri} {...props}/>)} />
           <Route path="/register" render={(props) => (<RegisterPage baseUri={baseUri} {...props}/>)} />
           <Route path="/dashboard" render={(props) => (<Dashboard baseUri={baseUri} {...props}/>)} />
+          <Route path="/friends" render={(props) => (<Friends baseUri={baseUri} {...props}/>)} />
         </Switch>
       </Router>
     </div>

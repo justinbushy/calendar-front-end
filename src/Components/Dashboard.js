@@ -8,6 +8,7 @@ import MenuIcon from 'material-ui-icons/Menu';
 import Button from 'material-ui/Button';
 import List, { ListItem } from 'material-ui/List';
 import Grid from 'material-ui/Grid';
+import { Link } from 'react-router-dom';
 
 import Calendar from './Calendar';
 
@@ -56,7 +57,10 @@ class Dashboard extends Component {
         >
           <div style={listStyle}>
           <List>
-            <ListItem button>
+            <ListItem button component={Link} to={{
+              pathname: '/friends',
+              state: { userId: this.state.userId, authTok: this.state.authTok }
+            }}>
               Friends
             </ListItem>
             <ListItem button>
