@@ -6,6 +6,7 @@ import Dialog, {
 } from 'material-ui/Dialog';
 import Button from 'material-ui/Button';
 import Typography from 'material-ui/Typography';
+import moment from 'moment';
 
 class EventDialog extends Component {
   constructor(props) {
@@ -14,8 +15,18 @@ class EventDialog extends Component {
     this.state = {
       title: props.title,
       description: props.description,
-      start_time: props.start_time,
-      end_time: props.end_time
+      start_time: moment.utc(props.start_time).format("LT"),
+      end_time: moment.utc(props.end_time).format("LT")
+    };
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if(nextProps !== this.props) {
+      this.setState({title: nextProps.title,
+        description: nextProps.description,
+        start_time: moment.utc(nextProps.start_time).format("LT"),
+        end_time: moment.utc(nextProps.end_time).format("LT")
+      });
     }
   }
 
@@ -35,19 +46,19 @@ class EventDialog extends Component {
             <Typography type="caption">
               Description
             </Typography>
-            <Typography type="body" align="center">
+            <Typography type="subheading" align="center">
               {this.state.description}
             </Typography>
             <Typography type="caption">
               Start Time
             </Typography>
-            <Typography type="body" align="center">
+            <Typography type="headline" align="center">
               {this.state.start_time}
             </Typography>
             <Typography type="caption">
               End Time
             </Typography>
-            <Typography type="body" align="center">
+            <Typography type="headline" align="center">
               {this.state.end_time}
             </Typography>
           </DialogContent>
