@@ -87,9 +87,9 @@ class DayDialog extends Component {
     this.setState({eventDialogOpen: false});
   };
 
-  handleOpenEventDialog = value => () =>{
+  handleOpenEventDialog = value => () => {
     this.setState({eventDialogOpen: true, selectedEvent: value})
-  }
+  };
 
   createEventList() {
     let len = this.state.events.length;
@@ -123,6 +123,9 @@ class DayDialog extends Component {
     if(this.state.events.length > 0) {
       eventDial = <EventDialog
         title={this.state.events[this.state.selectedEvent].title}
+        description={this.state.events[this.state.selectedEvent].description}
+        start_time={this.state.events[this.state.selectedEvent].start_time}
+        end_time={this.state.events[this.state.selectedEvent].end_time}
         onRequestClose={this.handleEventRequestClose}
         open={this.state.eventDialogOpen}
         />;
@@ -169,14 +172,6 @@ class DayDialog extends Component {
           day={this.state.day}
         />
         {eventDial}
-        {/*<EventDialog
-          title={this.state.title}
-          description={this.state.description}
-          start_time={this.state.start_time}
-          end_time={this.state.end_time}
-          onRequestClose={this.handleEventRequestClose}
-          open={this.state.eventDialogOpen}
-        />*/}
       </div>
     )
   }
