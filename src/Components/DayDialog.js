@@ -108,7 +108,7 @@ class DayDialog extends Component {
 
     console.log('render');
     console.log(this.state.checked);
-    const eList = this.createEventList();
+    //const eList = this.createEventList();
     const tList = this.createTaskList();
     return (
       <div>

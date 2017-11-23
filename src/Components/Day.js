@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Button from 'material-ui/Button';
 import DayDialog from "./DayDialog";
 import axios from 'axios';
 import IconButton from 'material-ui/IconButton'

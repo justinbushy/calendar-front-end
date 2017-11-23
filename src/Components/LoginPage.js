@@ -9,6 +9,7 @@ import Typography from 'material-ui/Typography';
 import MenuIcon from 'material-ui-icons/Menu';
 import Drawer from 'material-ui/Drawer';
 import List, { ListItem } from 'material-ui/List';
+import Dialog, { DialogTitle, DialogActions } from 'material-ui/Dialog';
 import axios from 'axios';
 import { Link, Redirect } from 'react-router-dom';
 
@@ -26,7 +27,9 @@ class LoginPage extends Component {
       successful: false,
       drawerOpen: false,
       userId: '',
-      authTok: ''
+      authTok: '',
+      wrongPass: false,
+      wrongEmail: false
     };
 
     this.toggleDrawer = this.toggleDrawer.bind(this);
@@ -34,23 +37,31 @@ class LoginPage extends Component {
 
   toggleDrawer() {
     this.setState({drawerOpen: !this.state.drawerOpen});
-  }
+  };
+
+  handleWrongPassClose = () => {
+    this.setState({wrongPass: false});
+  };
+
+  handleWrongEmailClose = () => {
+    this.setState({wrongEmail: false});
+  };
 
   handleClick(event) {
     console.log('clicked');
-    var payload = {
+    let payload = {
       "email":this.state.email,
       "password":this.state.password
     };
 
-    var self = this;
+    let self = this;
     console.log(payload);
     console.log(this.props.baseUri + '/users/signing');
     axios.post(this.props.baseUri + '/users/signin', payload)
       .then(function(response) {
-        console.log(response);
+        console.log('response');
         if(response.status === 200) {
-          var uID = response.data.user_id;
+          let uID = response.data.user_id;
           console.log("uID: " + uID);
           self.setState({userId: uID, authTok: response.data.token});
           console.log('userId');
@@ -60,6 +71,12 @@ class LoginPage extends Component {
       })
       .catch(function(err) {
         console.log(err);
+        if(err.response.data.message === "Wrong password") {
+          self.setState({wrongPass: true});
+        }
+        else if(err.response.data.message === "User not found") {
+          self.setState({wrongEmail: true});
+        }
       })
   }
 
@@ -120,6 +137,26 @@ class LoginPage extends Component {
             Register
           </Button>
         </div>
+        <Dialog open={this.state.wrongPass}>
+          <DialogTitle>
+            Wrong Password
+          </DialogTitle>
+          <DialogActions>
+            <Button onClick={this.handleWrongPassClose} color="primary" autoFocus>
+              Okay
+            </Button>
+          </DialogActions>
+        </Dialog>
+        <Dialog open={this.state.wrongEmail}>
+          <DialogTitle>
+            User not found
+          </DialogTitle>
+          <DialogActions>
+            <Button onClick={this.handleWrongEmailClose} color="primary" autoFocus>
+              Okay
+            </Button>
+          </DialogActions>
+        </Dialog>
       </div>
     );
   }

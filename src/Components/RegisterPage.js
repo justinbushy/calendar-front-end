@@ -102,13 +102,6 @@ class RegisterPage extends Component {
             />
             <br/>
             <br/>
-            {/*
-            <RaisedButton
-              label="Register"
-              primary={true}
-              onClick={(event) => this.handleClick(event)}
-            />
-            */}
             <Button raised color="primary" onClick={(event) => this.handleClick(event)}>
               Register
             </Button>

@@ -3,10 +3,6 @@ import Grid from 'material-ui/Grid';
 import Button from 'material-ui/Button';
 import Day from './Day';
 
-const buttonStyles = {
-  padding: 0,
-};
-
 const gridStyles = {
   flexGrow: 1,
   marginTop: 30,
