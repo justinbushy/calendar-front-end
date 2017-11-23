@@ -15,7 +15,7 @@ import { Link, Redirect } from 'react-router-dom';
 
 const styles = {
   width: 150
-}
+};
 
 class LoginPage extends Component {
   constructor(props) {

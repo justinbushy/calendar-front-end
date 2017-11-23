@@ -6,6 +6,7 @@ import Checkbox from 'material-ui/Checkbox';
 import ControlPoint from 'material-ui-icons/ControlPoint';
 import EventFormDialog from './EventFormDialog';
 import TaskFormDialog from './TaskFormDialog';
+import EventDialog from './EventDialog';
 
 class DayDialog extends Component {
   constructor(props) {
@@ -17,13 +18,15 @@ class DayDialog extends Component {
       tasks: props.tasks,
       addDialogOpen: false,
       taskDialogOpen: false,
+      eventDialogOpen: false,
       userId: props.userId,
       authTok: props.authTok,
       baseUri: props.baseUri,
       day: props.day,
       dayChanged: props.dayChanged,
       eventsList: [],
-      tasksList: []
+      tasksList: [],
+      selectedEvent: 0
     };
 
   }
@@ -80,12 +83,20 @@ class DayDialog extends Component {
     this.props.dayChanged();
   };
 
+  handleEventRequestClose = () => {
+    this.setState({eventDialogOpen: false});
+  };
+
+  handleOpenEventDialog = value => () =>{
+    this.setState({eventDialogOpen: true, selectedEvent: value})
+  }
+
   createEventList() {
     let len = this.state.events.length;
     let eventsList = [];
     for(let i = 0; i < len; i++) {
       let title = this.state.events[i].title;
-      eventsList.push(<ListItem key={i} button>{title}</ListItem>);
+      eventsList.push(<ListItem key={i} button onClick={this.handleOpenEventDialog(i)}>{title}</ListItem>);
     }
     return eventsList;
   }
@@ -106,10 +117,18 @@ class DayDialog extends Component {
   render() {
     const { open, day } = this.props;
 
-    console.log('render');
-    console.log(this.state.checked);
-    //const eList = this.createEventList();
     const tList = this.createTaskList();
+
+    let eventDial = null;
+    if(this.state.events.length > 0) {
+      eventDial = <EventDialog
+        title={this.state.events[this.state.selectedEvent].title}
+        onRequestClose={this.handleEventRequestClose}
+        open={this.state.eventDialogOpen}
+        />;
+    }
+
+    if(this.state)
     return (
       <div>
         <Dialog onRequestClose={this.handleRequestClose} open={open}>
@@ -121,26 +140,10 @@ class DayDialog extends Component {
               <ListItemIcon>
                 <ControlPoint/>
               </ListItemIcon>
-              <ListItemText primary="Add Appt"/>
+              <ListItemText primary="Add Event"/>
             </ListItem>
             <Divider/>
-            {tList}
-            {/*<ListItem key={0} button disableRipple onClick={this.handleCheckedToggle(0)}>
-              <Checkbox
-                checked={this.state.checked.indexOf(0) !== -1}
-                tabIndex={-1}
-                disableRipple={true}
-              />
-              <ListItemText primary="10 min walk"/>
-            </ListItem>
-            <ListItem key={1} button disableRipple onClick={this.handleCheckedToggle(1)}>
-              <Checkbox
-                checked={this.state.checked.indexOf(1) !== -1}
-                tabIndex={-1}
-                disableRipple={true}
-              />
-              <ListItemText primary="Eat Breakfast"/>
-            </ListItem>*/}
+              {tList}
             <ListItem button>
               <ListItemIcon>
                 <ControlPoint/>
@@ -165,6 +168,15 @@ class DayDialog extends Component {
           baseUri={this.state.baseUri}
           day={this.state.day}
         />
+        {eventDial}
+        {/*<EventDialog
+          title={this.state.title}
+          description={this.state.description}
+          start_time={this.state.start_time}
+          end_time={this.state.end_time}
+          onRequestClose={this.handleEventRequestClose}
+          open={this.state.eventDialogOpen}
+        />*/}
       </div>
     )
   }
