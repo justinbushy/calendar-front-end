@@ -25,7 +25,6 @@ class Day extends Component {
       buttonColor: 'default'
     };
 
-    console.log(this.state);
   }
 
   componentDidMount() {

@@ -20,7 +20,6 @@ class Dashboard extends Component {
   constructor(props) {
     super(props);
 
-    console.log(props.location.state.userId);
     this.state = {
       drawerOpen : false,
       baseUri: this.props.baseUri,
@@ -28,8 +27,7 @@ class Dashboard extends Component {
       authTok: props.location.state.authTok
     };
 
-    console.log(this.state);
-   this.toggleDrawer = this.toggleDrawer.bind(this);
+    this.toggleDrawer = this.toggleDrawer.bind(this);
   }
 
   toggleDrawer() {

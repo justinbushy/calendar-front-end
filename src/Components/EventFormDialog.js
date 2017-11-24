@@ -24,8 +24,6 @@ class EventFormDialog extends Component {
       openSuccessDialog: false,
     }
 
-    console.log('eventdialog state')
-    console.log(this.state)
   }
 
   handleRequestClose = () => {

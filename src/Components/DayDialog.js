@@ -35,8 +35,6 @@ class DayDialog extends Component {
     if(nextProps !== this.props) {
       const eList = this.createEventList();
       const tList = this.createTaskList();
-      console.log('elist');
-      console.log(eList);
       this.setState({events: nextProps.events,
         tasks: nextProps.tasks,
         eventsList: eList,
@@ -50,8 +48,6 @@ class DayDialog extends Component {
     const currentIndex = checked.indexOf(value);
     const newChecked = [...checked];
 
-    console.log('checked toggle');
-    console.log(value);
     if(currentIndex === -1) {
       newChecked.push(value);
     }

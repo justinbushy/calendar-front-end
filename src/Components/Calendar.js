@@ -48,7 +48,8 @@ class Calendar extends Component {
       else {
         days.push(
           <Grid key={i + (7 * start)} item xs={1} sm>
-            <Button disabled disableRipple={true}/>
+            <Button disabled disableRipple={true}>
+            </Button>
           </Grid>);
       }
     }
@@ -59,7 +60,7 @@ class Calendar extends Component {
     let grids = [];
     for(let i =0; i < 5; i++) {
       let days = this.createWeek(i);
-      grids.push(<Grid container justify="space-around" alignItems="center">{days}</Grid>);
+      grids.push(<Grid key={i} container justify="space-around" alignItems="center">{days}</Grid>);
     }
     return grids;
   }

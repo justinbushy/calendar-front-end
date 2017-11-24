@@ -1,15 +1,23 @@
 import React, { Component } from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Drawer from 'material-ui/Drawer';
 import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
 import IconButton from 'material-ui/IconButton';
 import MenuIcon from 'material-ui-icons/Menu';
 import Typography from 'material-ui/Typography';
-import List, { ListItem } from 'material-ui/List';
+import List, { ListItem, ListItemText, ListItemIcon } from 'material-ui/List';
+import ControlPoint from 'material-ui-icons/ControlPoint';
+import AccountCircle from 'material-ui-icons/AccountCircle';
+import Divider from 'material-ui/Divider';
 
 const styles = {
   width: 150
+};
+
+const groupStyles = {
+  marginTop: 20,
+  marginLeft: 20
 };
 
 class Friends extends Component {
@@ -22,9 +30,6 @@ class Friends extends Component {
       drawerOpen: false
     };
 
-    console.log('Friends');
-    console.log(this.state.userId);
-    console.log(this.state.authTok);
   }
 
   toggleDrawer = () => {
@@ -58,6 +63,32 @@ class Friends extends Component {
             </ListItem>
           </List>
         </Drawer>
+        <div>
+          <Typography type="headline" align="left" style={groupStyles}>
+            Friends
+          </Typography>
+          <List>
+            <ListItem button>
+              <ListItemIcon>
+                <AccountCircle/>
+              </ListItemIcon>
+              <ListItemText primary="Chelsey Bush" align="left"/>
+            </ListItem>
+            <ListItem button>
+              <ListItemIcon>
+                <AccountCircle/>
+              </ListItemIcon>
+              <ListItemText primary="Bart Bush" align="left"/>
+            </ListItem>
+            <Divider/>
+            <ListItem button>
+              <ListItemIcon>
+                <ControlPoint/>
+              </ListItemIcon>
+              <ListItemText primary="Add Friend" align="left"/>
+            </ListItem>
+          </List>
+        </div>
       </div>
     );
   }
