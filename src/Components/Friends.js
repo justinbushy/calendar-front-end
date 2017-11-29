@@ -10,6 +10,7 @@ import List, { ListItem, ListItemText, ListItemIcon } from 'material-ui/List';
 import ControlPoint from 'material-ui-icons/ControlPoint';
 import AccountCircle from 'material-ui-icons/AccountCircle';
 import Divider from 'material-ui/Divider';
+import FriendFormDialog from './FriendFormDialog';
 
 const styles = {
   width: 150
@@ -27,13 +28,22 @@ class Friends extends Component {
     this.state = {
       userId: props.location.state.userId,
       authTok: props.location.state.authTok,
-      drawerOpen: false
+      drawerOpen: false,
+      friendDialogOpen: false
     };
 
   }
 
   toggleDrawer = () => {
     this.setState({drawerOpen: !this.state.drawerOpen});
+  };
+
+  handleDialogOpen = () => {
+    this.setState({friendDialogOpen: true});
+  };
+
+  handleRequestClose = () => {
+    this.setState({friendDialogOpen: false});
   };
 
   render() {
@@ -81,7 +91,7 @@ class Friends extends Component {
               <ListItemText primary="Bart Bush" align="left"/>
             </ListItem>
             <Divider/>
-            <ListItem button>
+            <ListItem button onClick={this.handleDialogOpen}>
               <ListItemIcon>
                 <ControlPoint/>
               </ListItemIcon>
@@ -89,6 +99,12 @@ class Friends extends Component {
             </ListItem>
           </List>
         </div>
+        <FriendFormDialog
+          open={this.state.friendDialogOpen}
+          userId={this.state.userId}
+          authTok={this.state.authTok}
+          onRequestClose={this.handleRequestClose}
+        />
       </div>
     );
   }
