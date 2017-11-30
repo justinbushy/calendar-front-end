@@ -16,9 +16,34 @@ class FriendFormDialog extends Component {
       friend_user_name: '',
       userId: props.userId,
       authTok: props.authTok,
-      baseUri: props.baseUri
+      baseUri: props.baseUri,
+      openSuccessDialog: false
     }
   }
+
+  handleAddEvent = () => {
+    let payload = {
+      "user_name": this.state.friend_user_name
+    };
+
+    let authStr = 'JWT ' + this.state.authTok;
+    let self = this;
+    axios.post(this.state.baseUri + '/users/'+ this.state.userId + '/friends', payload,
+      { headers: { Authorization: authStr } })
+      .then(function(response) {
+        if(response.status === 200) {
+          self.setState({openSuccessDialog: true});
+        }
+      })
+      .catch(function(err) {
+        console.log(err);
+      })
+  };
+
+  handleCloseSuccessDialog = () => {
+    this.setState({openSuccessDialog: false});
+    this.props.onRequestClose();
+  };
 
   handleRequestClose = () => {
     this.props.onRequestClose();
@@ -44,6 +69,16 @@ class FriendFormDialog extends Component {
             </Button>
             <Button color="accent" onClick={this.handleRequestClose}>
               Cancel
+            </Button>
+          </DialogActions>
+        </Dialog>
+        <Dialog open={this.state.openSuccessDialog}>
+          <DialogTitle>
+            Friend Request Sent
+          </DialogTitle>
+          <DialogActions>
+            <Button onClick={this.handleCloseSuccessDialog} color="primary" autoFocus>
+              Okay
             </Button>
           </DialogActions>
         </Dialog>

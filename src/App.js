@@ -14,7 +14,7 @@ import Friends from './Components/Friends';
 class App extends Component {
   render() {
     /*var baseUri = "https://immense-eyrie-34156.herokuapp.com/api";*/
-    let baseUri = "http://10.249.207.217:5000/api";
+    let baseUri = "http://localhost:5000/api";
     return (
     <div className="App">
       <Router>

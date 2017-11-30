@@ -57,7 +57,7 @@ class Dashboard extends Component {
           <List>
             <ListItem button component={Link} to={{
               pathname: '/friends',
-              state: { userId: this.state.userId, authTok: this.state.authTok }
+              state: { userId: this.state.userId, authTok: this.state.authTok, baseUri: this.state.baseUri }
             }}>
               Friends
             </ListItem>

@@ -29,7 +29,8 @@ class Friends extends Component {
       userId: props.location.state.userId,
       authTok: props.location.state.authTok,
       drawerOpen: false,
-      friendDialogOpen: false
+      friendDialogOpen: false,
+      baseUri: props.location.state.baseUri
     };
 
   }
@@ -104,6 +105,7 @@ class Friends extends Component {
           userId={this.state.userId}
           authTok={this.state.authTok}
           onRequestClose={this.handleRequestClose}
+          baseUri={this.state.baseUri}
         />
       </div>
     );
